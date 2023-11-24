@@ -10,6 +10,7 @@ from enum import Enum, auto
 import os
 import random
 import string
+import platform
 
 
 class HostOS(Enum):
@@ -92,10 +93,10 @@ class Host:
             raise TypeError(self.os)
 
 
-_uname = os.uname()
-if _uname.sysname == "Linux":
+_uname = platform.uname()
+if _uname.system == "Linux":
     LOCAL_OS = HostOS.Linux
 else:
-    raise ValueError(f"Unsupported local system {_uname.sysname}")
+    raise ValueError(f"Unsupported local system '{_uname.system}'")
 
 LOCAL_HOST = Host("localhost", LOCAL_OS)
